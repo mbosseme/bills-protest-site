@@ -1,0 +1,28 @@
+/* Zubaz-inspired background: blue and red zebra stripes */
+.zubaz-bg {
+  min-height: 100vh;
+  background: repeating-linear-gradient(
+    120deg,
+    #00338D 0 30px,
+    #C60C30 30px 60px,
+    #fff 60px 90px,
+    #00338D 90px 120px
+  );
+  background-size: 180px 180px;
+}
+
+/* Zubaz-style text effect */
+.zubaz-text {
+  font-family: 'Impact', 'Arial Black', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.25rem;
+  background: url('data:image/svg+xml;utf8,<svg width="300" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 Q30,10 60,20 T120,20 T180,20 T240,20 T300,20" fill="none" stroke="%2300338D" stroke-width="16"/><path d="M0,30 Q30,40 60,30 T120,30 T180,30 T240,30 T300,30" fill="none" stroke="%23C60C30" stroke-width="16"/></svg>');
+  background-size: 300px 40px;
+  background-repeat: repeat-x;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #00338D;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #fff, 0 0 2px #C60C30;
+  padding: 0.5rem 0;
+}
