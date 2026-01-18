@@ -1,3 +1,5 @@
+
+import React from 'react';
 import './zubaz.css';
 
 function alternatingRedBlue(text) {
@@ -12,9 +14,11 @@ function alternatingRedBlue(text) {
 }
 
 function App() {
+  const [page, setPage] = React.useState('main');
   const contractText =
-    `Buffalo Retake Game Petition (Draft)\n\nHey NFL,\n\nWe, the undersigned Bills fans, watched that game and, well, we all saw what happened. Brandin Cooks caught it. The refs? Not so much.\n\nWe’re not lawyers, but we know a catch when we see one. So here’s our ask: Give us a retake game. No drama, just football.\n\nSign below if you want another shot for the Bills.\n\nGo Bills!`;
+    `Buffalo Retake Game Petition\n\nHey NFL,\n\nWe, the undersigned Bills fans, watched that game and, well, we all saw what happened. Brandin Cooks caught it. The refs? Not so much.\n\nWe’re not lawyers, but we know a catch when we see one. So here’s our ask: Give us a retake game. No drama, just football.\n\nSign below if you want another shot for the Bills.\n\nGo Bills!`;
 
+  // Petition form state
   const [signing, setSigning] = React.useState(false);
   const [signed, setSigned] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -53,78 +57,86 @@ function App() {
     }
   }
 
+  if (page === 'main') {
+    return (
+      <div className="zubaz-bg" style={{ minHeight: '100vh', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{
+          background: 'rgba(255,255,255,0.92)',
+          borderRadius: '1.5rem',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
+          padding: '2.5rem 2rem',
+          maxWidth: 700,
+          width: '100%',
+          textAlign: 'left',
+        }}>
+          <h1 style={{ fontFamily: 'Impact, sans-serif', fontSize: '2.5rem', marginBottom: 12 }}>
+            {alternatingRedBlue('Bills Fans Demand a Retake!')}
+          </h1>
+          <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 32, lineHeight: 1.5, color: '#00338D' }}>
+            In overtime, Brandin Cooks made a catch so clean it could've been used in a detergent commercial, but the refs must've had their Zubaz pulled over their eyes. The call left Bills fans stunned, Broncos fans confused, and Billy Buffalo looking for the rulebook. If you think the Bills deserve a fair shot (and maybe a ref who knows a catch from a magic trick), sign our digital petition for a retake game. Let's show the league that Buffalo stands together for fairness, fun, and a little bit of football justice. Add your name and let your voice be heard: we want a retake!
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <button
+              style={{ background: '#00338D', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 8, padding: '0.8rem 2.2rem', fontSize: '1.2rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+              onClick={() => setPage('petition')}
+            >
+              Go to Petition
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Petition page
   return (
-    <div className="zubaz-bg" style={{ minHeight: '100vh', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div className="zubaz-bg" style={{ minHeight: '100vh', padding: 0, margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
         background: 'rgba(255,255,255,0.92)',
         borderRadius: '1.5rem',
         boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
         padding: '2rem',
-        maxWidth: 1000,
+        maxWidth: 600,
         width: '100%',
+        textAlign: 'left',
       }}>
-        <div style={{ flex: 1, textAlign: 'left', paddingRight: 32, borderRight: '2px solid #00338D', minWidth: 320 }}>
-          <div style={{
-            background: '#fff',
-            border: '2px dashed #C60C30',
-            borderRadius: '12px',
-            boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
-            padding: '2rem 1.5rem',
-            fontFamily: 'serif',
-            fontSize: '1.1rem',
-            marginBottom: 24,
-            minHeight: 420,
-            position: 'relative',
-          }}>
-            <h2 style={{
-              fontFamily: 'Impact, Arial Black, Arial, sans-serif',
-              color: '#00338D',
-              fontSize: '1.3rem',
-              marginBottom: 16,
-              textAlign: 'center',
-              letterSpacing: 1
-            }}>Petition (Draft)</h2>
-            <pre style={{
-              whiteSpace: 'pre-wrap',
-              fontFamily: 'inherit',
-              background: 'none',
-              border: 'none',
-              color: '#222',
-              margin: 0,
-              marginBottom: 24
-            }}>{contractText}</pre>
-            {signed ? (
-              <div style={{ color: '#00338D', fontWeight: 'bold', textAlign: 'center', marginTop: 24 }}>
-                Thanks for signing! Go Bills!
-              </div>
-            ) : (
-              <form style={{ marginTop: 12, textAlign: 'center' }} onSubmit={handleSign}>
-                <input type="text" name="name" placeholder="Your Name (Signature)" required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: 6, border: '1px solid #00338D', marginRight: 12, width: '60%' }} disabled={signing} />
-                <button type="submit" style={{ background: '#C60C30', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 6, padding: '0.5rem 1.2rem', fontSize: '1rem', cursor: 'pointer' }} disabled={signing}>
-                  {signing ? 'Signing...' : 'Sign'}
-                </button>
-              </form>
-            )}
-            {error && <div style={{ color: '#C60C30', marginTop: 12, textAlign: 'center' }}>{error}</div>}
+        <h2 style={{
+          fontFamily: 'Impact, Arial Black, Arial, sans-serif',
+          color: '#00338D',
+          fontSize: '1.3rem',
+          marginBottom: 16,
+          textAlign: 'center',
+          letterSpacing: 1
+        }}>Petition</h2>
+        <pre style={{
+          whiteSpace: 'pre-wrap',
+          fontFamily: 'inherit',
+          background: 'none',
+          border: 'none',
+          color: '#222',
+          margin: 0,
+          marginBottom: 24
+        }}>{contractText}</pre>
+        {signed ? (
+          <div style={{ color: '#00338D', fontWeight: 'bold', textAlign: 'center', marginTop: 24 }}>
+            Thanks for signing! Go Bills!
           </div>
-        </div>
-        <div style={{ flex: 1, textAlign: 'left', paddingLeft: 32, minWidth: 320 }}>
-          <h1 style={{ color: '#C60C30', fontFamily: 'Impact, sans-serif', fontSize: '2.5rem', marginBottom: 12 }}>
-            Bills Fans Demand a Retake!
-          </h1>
-          <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 24, lineHeight: 1.5 }}>
-            {alternatingRedBlue("In overtime, Brandin Cooks made a catch so clean it could've been used in a detergent commercial, but the refs must've had their Zubaz pulled over their eyes. The call left Bills fans stunned, Broncos fans confused, and Billy Buffalo looking for the rulebook. If you think the Bills deserve a fair shot (and maybe a ref who knows a catch from a magic trick), sign our digital petition for a retake game. Let's show the league that Buffalo stands together for fairness, fun, and a little bit of football justice. Add your name and let your voice be heard: we want a retake!")}
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <img
-              src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/bills/ugz40ngpy416xfay4mak"
-              alt="Billy Buffalo mascot"
-              style={{ width: 180, borderRadius: '50%', border: '6px solid #00338D', marginLeft: 8 }}
-            />
-          </div>
+        ) : (
+          <form style={{ marginTop: 12, textAlign: 'center' }} onSubmit={handleSign}>
+            <input type="text" name="name" placeholder="Your Name (Signature)" required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: 6, border: '1px solid #00338D', marginRight: 12, width: '60%' }} disabled={signing} />
+            <button type="submit" style={{ background: '#C60C30', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 6, padding: '0.5rem 1.2rem', fontSize: '1rem', cursor: 'pointer' }} disabled={signing}>
+              {signing ? 'Signing...' : 'Sign'}
+            </button>
+          </form>
+        )}
+        {error && <div style={{ color: '#C60C30', marginTop: 12, textAlign: 'center' }}>{error}</div>}
+        <div style={{ textAlign: 'center', marginTop: 32 }}>
+          <button
+            style={{ background: '#00338D', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: 8, padding: '0.6rem 1.6rem', fontSize: '1rem', cursor: 'pointer', marginTop: 8 }}
+            onClick={() => setPage('main')}
+          >
+            Back to Main
+          </button>
         </div>
       </div>
     </div>
