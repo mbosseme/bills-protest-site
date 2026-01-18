@@ -104,7 +104,8 @@ app.get('/api/signatures', async (req, res) => {
   if (apiKey !== expectedKey) {
     return res.status(403).json({ error: 'Forbidden' });
   }
-  res.json(readSignatures());
+  const sigs = await readSignatures();
+  res.json(sigs);
 });
 
 app.listen(PORT, () => {
